@@ -37,6 +37,9 @@ object Deps {
   val channelIds: List[ModuleID] =
     List(Compile.bitcoinsAppCommons, Compile.grizzledSlf4j)
 
+  val htlcInterceptor: List[ModuleID] =
+    List(Compile.bitcoinsLnd, Compile.grizzledSlf4j)
+
   val pubkeyRotator: List[ModuleID] =
     List(Compile.bitcoinsKeyManager,
          Compile.bitcoinsLnd,

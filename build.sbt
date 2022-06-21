@@ -21,6 +21,7 @@ lazy val translnd = project
     sphinxTest,
     channelIds,
     channelIdsTest,
+    htlcInterceptor,
     pubkeyRotator,
     pubkeyRotatorTest,
     testkit
@@ -30,6 +31,7 @@ lazy val translnd = project
     sphinxTest,
     channelIds,
     channelIdsTest,
+    htlcInterceptor,
     pubkeyRotator,
     pubkeyRotatorTest,
     testkit
@@ -62,12 +64,19 @@ lazy val channelIdsTest = project
   .settings(name := "channel-ids-test", libraryDependencies ++= Deps.testkit)
   .dependsOn(channelIds)
 
+lazy val htlcInterceptor = project
+  .in(file("htlc-interceptor"))
+  .settings(CommonSettings.settings: _*)
+  .settings(name := "htlc-interceptor",
+            libraryDependencies ++= Deps.htlcInterceptor)
+  .dependsOn(sphinx)
+
 lazy val pubkeyRotator = project
   .in(file("pubkey-rotator"))
   .settings(CommonSettings.settings: _*)
   .settings(name := "pubkey-rotator",
             libraryDependencies ++= Deps.pubkeyRotator)
-  .dependsOn(sphinx, channelIds)
+  .dependsOn(sphinx, channelIds, htlcInterceptor)
 
 lazy val pubkeyRotatorTest = project
   .in(file("pubkey-rotator-test"))
